@@ -2,18 +2,20 @@ package com.redhat.consulting.example.jms;
 
 import com.ibm.mq.jms.MQConnectionFactory;
 import com.ibm.mq.jms.MQQueueConnectionFactory;
-import io.quarkus.arc.DefaultBean;
 import org.apache.camel.component.jms.JmsComponent;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
 import static com.ibm.msg.client.jms.JmsConstants.*;
 import static com.ibm.msg.client.wmq.common.CommonConstants.*;
 
+/**
+ * This class is used to produce the JmsComponent and ConnectionFactory needed for Camel
+ * to connect to a JMS compliant message queue (MQ Series)
+ */
 @ApplicationScoped
 public class MessagingBeans {
 
@@ -37,6 +39,10 @@ public class MessagingBeans {
 	@ConfigProperty(name = "mq.pass", defaultValue = "password")
 	String mqPass;
 
+	/**
+	 * Produces a Named Bean in the CDI object graph which can be used for Camel routes
+	 * @return A {@link JmsComponent} configured for MQ Series using a {@link MQConnectionFactory}
+	 */
 	@Named
 	public JmsComponent mq() {
 		JmsComponent jmsComponent = new JmsComponent();
@@ -44,6 +50,10 @@ public class MessagingBeans {
 		return jmsComponent;
 	}
 
+	/**
+	 * Produces a Named Bean in the CDI object graph which can be used connecting to MQ Series
+	 * @return A {@link MQConnectionFactory} configured using properties
+	 */
 	@Named
 	public MQConnectionFactory createMqConnectionFactory() {
 		MQQueueConnectionFactory mqQueueConnectionFactory = new MQQueueConnectionFactory();

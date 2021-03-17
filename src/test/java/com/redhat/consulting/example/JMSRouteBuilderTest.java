@@ -26,8 +26,11 @@ public class JMSRouteBuilderTest extends CamelTestSupport {
 	@Override
 	protected RouteBuilder createRouteBuilder() throws Exception {
 		JMSRouteBuilder jmsRouteBuilder = new JMSRouteBuilder();
+
+		// Set the in/out queue URIs for the RouteBuilder so that we can inject mocks and assert results
 		jmsRouteBuilder.jmsQueueInUri = "direct:start";
 		jmsRouteBuilder.jmsQueueOutUri = "mock:dest";
+
 		return jmsRouteBuilder;
 	}
 }

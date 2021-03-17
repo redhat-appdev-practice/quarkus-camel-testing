@@ -9,6 +9,10 @@ import javax.inject.Named;
 @ApplicationScoped
 public class Configurations {
 
+	/**
+	 * Produces a named bean in the CDI object graph to configure logging for Camel
+	 * @return A {@link LogComponent} configured for Quarkus and JBoss Logging
+	 */
 	@Named
 	LogComponent log() {
 		DefaultExchangeFormatter formatter = new DefaultExchangeFormatter();
