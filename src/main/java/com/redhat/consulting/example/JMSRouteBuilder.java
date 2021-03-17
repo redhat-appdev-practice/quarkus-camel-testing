@@ -23,6 +23,7 @@ public class JMSRouteBuilder extends RouteBuilder {
 				.unmarshal().jacksonxml(HashMap.class)
 				.marshal().json(true)
 				.log("Input Received")
-				.to(jmsQueueOutUri);
+				.to(jmsQueueOutUri)
+				.to("log:info");
 	}
 }
