@@ -1,0 +1,20 @@
+---
+# https://hub.docker.com/r/ibmcom/mq
+version: '3.0'
+services:
+  mq:
+    image: docker.io/ibmcom/mq:latest
+    environment:
+      LICENSE: 'accept'
+      LANG: 'en_US'
+      LOG_FORMAT: 'basic'
+      MQ_QMGR_NAME: 'QM1'
+      MQ_ENABLE_METRICS: 'false'
+      MQ_ADMIN_PASSWORD: password
+      MQ_APP_PASSWORD: password
+    ports:
+    - '1414:1414'
+    - '9443:9443'
+    user: '1001'
+    volumes:
+    - ${PWD}/20-config.mqsc:/etc/mqm/20-config.mqsc
