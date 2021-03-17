@@ -1,8 +1,14 @@
-# camel-quarkus-test project
+# Quarkus + Camel + Unit Testing
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+
+## Starting the IBM MQ Series container
+```shell script
+cd mq
+docker-compose up -d
+```
 
 ## Running the application in dev mode
 
@@ -10,8 +16,19 @@ You can run your application in dev mode that enables live coding using:
 ```shell script
 ./mvnw compile quarkus:dev
 ```
-
+> **_NOTE:_**  When running in Dev Mode you **MUST** have an MQ instance running for Quarkus to connect to
 > **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+
+## Running Unit Tests
+
+The one and only test in the current project is run using JUnit4 and the Camel Test facility.
+This leverages the `CamelTestSupport` class and injects "mock" endpoints into the `RouteBuilder`
+
+```shell script
+./mvnw clean verify
+```
+
+
 
 ## Packaging and running the application
 
