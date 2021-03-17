@@ -28,7 +28,10 @@ public class XmlToJsonViaMqIT {
 		producer.send(xml);
 
 		Message json = consumer.receive(10000);
-		assertEquals("{\n  \"head\" : {\n    \"title\" : \"My Title\"\n  },\n  \"body\" : \"Value\"\n}", json.getBody(String.class));
+		assertNotNull(json);
+		assertTrue(json instanceof TextMessage);
+		TextMessage jsonTextMsg = (TextMessage)json;
+		assertEquals("{\n  \"head\" : {\n    \"title\" : \"My Title\"\n  },\n  \"body\" : \"Value\"\n}", jsonTextMsg.getText());
 	}
 
 }
