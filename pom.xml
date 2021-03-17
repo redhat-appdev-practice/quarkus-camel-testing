@@ -68,16 +68,11 @@
       <version>9.1.0.5</version>
     </dependency>
 
-<!--
-    Excluding the Quarkus test dependency allows us to use the camel-test
-    module which is based on JUnit4 and does not require a fully running
-    Quarkus application
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
       <scope>test</scope>
     </dependency>
--->
     <dependency>
       <groupId>org.apache.camel.quarkus</groupId>
       <artifactId>camel-quarkus-mock</artifactId>
@@ -113,11 +108,43 @@
       <plugin>
         <artifactId>maven-surefire-plugin</artifactId>
         <version>${surefire-plugin.version}</version>
+        <!--
+            Specifying the preferred test runner for Surefire allows us to use the camel-test
+            module which is based on JUnit4 and does not require a fully running
+            Quarkus application.
+        -->
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.maven.surefire</groupId>
+            <artifactId>surefire-junit4</artifactId>
+            <version>3.0.0-M5</version>
+          </dependency>
+        </dependencies>
         <configuration>
+          <includes>
+            <include>**/*Test.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/*IT.java</exclude>
+          </excludes>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             <maven.home>${maven.home}</maven.home>
           </systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-failsafe-plugin</artifactId>
+        <version>3.0.0-M5</version>
+        <configuration>
+          <testSourceDirectory>src/it/java</testSourceDirectory>
+          <includes>
+            <include>**/*IT.java</include>
+          </includes>
+          <excludes>
+            <exclude>**/*Test.java</exclude>
+          </excludes>
         </configuration>
       </plugin>
     </plugins>
