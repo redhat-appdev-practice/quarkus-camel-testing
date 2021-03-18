@@ -87,25 +87,6 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.2.0</version>
-        <executions>
-          <execution>
-            <id>add-integration-tests</id>
-            <goals>
-              <goal>add-test-source</goal>
-            </goals>
-            <phase>pre-integration-test</phase>
-            <configuration>
-              <sources>
-                <source>src/it/java</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
         <version>${quarkus-plugin.version}</version>
@@ -140,9 +121,6 @@
           </dependency>
         </dependencies>
         <configuration>
-          <includes>
-            <include>**/*Test.java</include>
-          </includes>
           <systemPropertyVariables>
             <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
             <maven.home>${maven.home}</maven.home>
@@ -153,19 +131,6 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>3.0.0-M5</version>
-        <dependencies>
-          <dependency>
-            <groupId>org.apache.maven.surefire</groupId>
-            <artifactId>surefire-junit</artifactId>
-            <version>2.6</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <testSourceDirectory>src/it/java</testSourceDirectory>
-          <includes>
-            <include>**/*IT.java</include>
-          </includes>
-        </configuration>
       </plugin>
     </plugins>
   </build>
