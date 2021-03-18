@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import javax.inject.Inject;
 import javax.jms.*;
 
-import java.util.IllegalFormatException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
