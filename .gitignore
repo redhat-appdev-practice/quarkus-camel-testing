@@ -38,5 +38,4 @@ nb-configuration.xml
 # Local environment
 .env
 **/*.jar
-mqjms.log.0
-mqjms.log.0.lck
+mqjms.log*

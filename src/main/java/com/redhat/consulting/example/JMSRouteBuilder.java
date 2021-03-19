@@ -21,9 +21,9 @@ public class JMSRouteBuilder extends RouteBuilder {
 	public void configure() throws Exception {
 		from(jmsQueueInUri)
 				.unmarshal().jacksonxml(HashMap.class)
-				.marshal().json(true)
+				.marshal().json()
 				.log("Input Received")
-				.to(jmsQueueOutUri)
+				.to(jmsQueueOutUri+"?jmsMessageType=Text")
 				.to("log:info");
 	}
 }

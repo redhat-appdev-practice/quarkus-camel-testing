@@ -17,4 +17,4 @@ services:
     - '9443:9443'
     user: '1001'
     volumes:
-    - ${PWD}/20-config.mqsc:/etc/mqm/20-config.mqsc
+    - ./20-config.mqsc:/etc/mqm/20-config.mqsc
