@@ -16,7 +16,7 @@ public class JMSRouteBuilderTest extends CamelTestSupport {
 	public void testJMSRoute() throws InterruptedException {
 		MockEndpoint jmsJsonOutput = getMockEndpoint("mock:dest");
 		jmsJsonOutput.setAssertPeriod(2000);
-		jmsJsonOutput.expectedBodiesReceived("{\n  \"head\" : {\n    \"title\" : \"My Title\"\n  },\n  \"body\" : \"Value\"\n}");
+		jmsJsonOutput.expectedBodiesReceived("{\"head\":{\"title\":\"My Title\"},\"body\":\"Value\"}");
 		jmsJsonOutput.expectedMessageCount(1);
 		template.sendBody("direct:start", "<html><head><title>My Title</title></head><body>Value</body></html>");
 
