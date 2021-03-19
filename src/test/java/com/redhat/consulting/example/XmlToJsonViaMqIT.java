@@ -54,7 +54,7 @@ public class XmlToJsonViaMqIT {
 
 		String result = messageFuture.orTimeout(5, TimeUnit.SECONDS).join();
 
-		assertEquals("{\n  \"head\" : {\n    \"title\" : \"My Title\"\n  },\n  \"body\" : \"Value\"\n}", result);
+		assertEquals("{\"head\":{\"title\":\"My Title\"},\"body\":\"Value\"}", result);
 		conn.stop();
 		producer.close();
 		consumer.close();
